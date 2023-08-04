@@ -1,40 +1,28 @@
-import React, { useEffect } from 'react';
-import { Circles } from 'react-loader-spinner';
-import css from './App.module.css';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
+import React, { useEffect, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import SharedLayout from './SharedLayout/SharedLayout';
 import { useContacts } from 'redux/useContacts';
-const Phonebook = () => {
-  const { visibleContacts, getContacts, isLoading, error } = useContacts();
+
+const Contacts = lazy(() => import('../pages/Contacts/Contacts.jsx'));
+const Home = lazy(() => import('../pages/Home.jsx'));
+const Login = lazy(() => import('../pages/Login.jsx'));
+const Register = lazy(() => import('../pages/Register.jsx'));
+
+export const App = () => {
+  const { getContacts } = useContacts();
 
   useEffect(() => {
     getContacts();
   }, [getContacts]);
 
   return (
-    <div className={css.appDiv}>
-      <section>
-        <h1>Phonebook</h1>
-        <ContactForm />
-      </section>
-      <section>
-        <h2>Contacts</h2>
-        <Filter />
-        {isLoading && !error && (
-          <Circles
-            height="80"
-            width="80"
-            color="#4d78a9"
-            wrapperClass={css.loader}
-          />
-        )}
-        {visibleContacts.length > 0 && (
-          <ContactList listContacts={visibleContacts} />
-        )}
-      </section>
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="contacts" element={<Contacts />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
+    </Routes>
   );
 };
-
-export default Phonebook;
