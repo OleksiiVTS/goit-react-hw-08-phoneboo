@@ -5,43 +5,48 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { getApi, addContact, deleteContact } from './operations';
+import { getUser, createUser, loginUser, logoutUser } from './operations';
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
+    dataUser: null,
+    token: null,
     dataContacts: [],
     isLoading: false,
     error: null,
   },
   extraReducers: builder => {
     builder
-      .addCase(getApi.fulfilled, (state, action) => {
-        state.dataContacts = action.payload;
+      .addCase(createUser.fulfilled, (state, action) => {
+        state.dataUser = action.payload.user;
+        state.token = action.payload.token;
       })
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.dataContacts.push(action.payload);
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.dataUser = action.payload.user;
+        state.token = action.payload.token;
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        const index = state.dataContacts.findIndex(
-          contact => contact.id === action.payload.id
-        );
-        state.dataContacts.splice(index, 1);
+      .addCase(logoutUser.fulfilled, state => {
+        state.dataUser = null;
+        state.token = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.dataUser = action.payload;
       })
       .addMatcher(
-        isAnyOf(isPending(getApi, addContact, deleteContact)),
+        isAnyOf(isPending(createUser, loginUser, logoutUser, getUser)),
         state => {
           state.isLoading = true;
         }
       )
       .addMatcher(
-        isAnyOf(isRejected(getApi, addContact, deleteContact)),
+        isAnyOf(isRejected(createUser, loginUser, logoutUser, getUser)),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
         }
       )
       .addMatcher(
-        isAnyOf(isFulfilled(getApi, addContact, deleteContact)),
+        isAnyOf(isFulfilled(createUser, loginUser, logoutUser, getUser)),
         state => {
           state.isLoading = false;
           state.error = null;
@@ -49,8 +54,5 @@ export const contactsSlice = createSlice({
       );
   },
 });
-
-// const extraActions = [getApi, addContact, deleteContact];
-// const getActions = type => isAnyOf(...extraActions.map(action => action[type]));
 
 export const contactsReducer = contactsSlice.reducer;

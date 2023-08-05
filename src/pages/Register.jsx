@@ -1,13 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContacts } from 'redux/useContacts';
 
 const Register = () => {
+  const { createNewUser } = useContacts();
+  const navigate = useNavigate();
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const name = evt.target.username.value;
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+    createNewUser({ name, email, password });
+    evt.target.reset();
+    navigate('/contacts');
+  };
+
   return (
     <div>
-      <Link to={'/'}>&#129044; Go back</Link>
-      <br />
-      <Link to="/">Home</Link>
+      <Link to={'/'}>&#129044; Back Home</Link>
       <h1>Register</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Name
           <br />

@@ -1,20 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContacts } from 'redux/useContacts';
 
 const Login = () => {
+  const { loginNewUser } = useContacts();
+  let navigate = useNavigate();
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const email = evt.target.email.value;
+    const password = evt.target.loginPassword.value;
+    loginNewUser({ email, password });
+    evt.target.reset();
+    navigate('/contacts');
+  };
+
   return (
     <div>
-      <Link to={'/'}>&#129044; Go back</Link>
-      <br />
-      <Link to="/">Home</Link>
+      <Link to={'/'}>&#129044; Back Home</Link>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Login
           <br />
           <input
-            type="text"
-            name="loginName"
-            autoComplete="username"
+            type="email"
+            name="email"
+            autoComplete="email"
             // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             // pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

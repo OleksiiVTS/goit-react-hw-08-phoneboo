@@ -5,13 +5,14 @@ import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import { useContacts } from 'redux/useContacts';
+import React from 'react';
 
 const Contacts = () => {
   const { visibleContacts, isLoading, error } = useContacts();
+
   return (
     <div>
-      <Link to={'/'}>&#129044; Go back</Link> <br />
-      <Link to="/">Home</Link>
+      <Link to={'/'}>&#129044; Back Home</Link>
       <div className={css.appDiv}>
         <section>
           <h1>Add Contacts</h1>

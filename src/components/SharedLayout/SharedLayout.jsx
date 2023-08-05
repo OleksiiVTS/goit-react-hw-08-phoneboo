@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
+import { useContacts } from 'redux/useContacts';
 import css from '../Loader/Loader.module.css';
 import {
   Header,
@@ -12,6 +13,8 @@ import {
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
+  const { logoutNewUser, isUser } = useContacts();
+
   return (
     <>
       <Header>
@@ -21,18 +24,24 @@ const SharedLayout = () => {
               <li>
                 <NavDivHeader>
                   <StyledLink to="/">Home</StyledLink>
-                  <StyledLink to="/contacts">Contacts</StyledLink>
+                  {isUser && <StyledLink to="/contacts">Contacts</StyledLink>}
                 </NavDivHeader>
               </li>
-              <li>
-                <NavDivHeader>
-                  <StyledLink to="/register">Register</StyledLink>
-                  <StyledLink to="/login">Login</StyledLink>
-                </NavDivHeader>
-              </li>
-              <li>
-                <LogOutHeader type="button">Log Out</LogOutHeader>
-              </li>
+              {!isUser && (
+                <li>
+                  <NavDivHeader>
+                    <StyledLink to="/register">Register</StyledLink>
+                    <StyledLink to="/login">Login</StyledLink>
+                  </NavDivHeader>
+                </li>
+              )}
+              {isUser && (
+                <li>
+                  <LogOutHeader type="button" onClick={() => logoutNewUser()}>
+                    Log Out
+                  </LogOutHeader>
+                </li>
+              )}
             </NavUlHeader>
           </nav>
         </Container>
