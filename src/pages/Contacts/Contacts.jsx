@@ -5,10 +5,21 @@ import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import { useContacts } from 'redux/useContacts';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Contacts = () => {
-  const { visibleContacts, isLoading, error } = useContacts();
+  const {
+    visibleContacts,
+    valueContacts,
+    isUser,
+    isLoading,
+    error,
+    getContacts,
+  } = useContacts();
+
+  useEffect(() => {
+    isUser && getContacts();
+  }, [getContacts, isUser]);
 
   return (
     <div>
@@ -29,7 +40,7 @@ const Contacts = () => {
               wrapperClass={css.loader}
             />
           )}
-          {visibleContacts.length > 0 && (
+          {valueContacts.length > 0 && (
             <ContactList listContacts={visibleContacts} />
           )}
         </section>

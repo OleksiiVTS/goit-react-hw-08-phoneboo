@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 import { useContacts } from 'redux/useContacts';
 import css from '../Loader/Loader.module.css';
@@ -14,6 +14,12 @@ import {
 
 const SharedLayout = () => {
   const { logoutNewUser, isUser } = useContacts();
+  let navigate = useNavigate();
+
+  const logOut = () => {
+    logoutNewUser();
+    navigate('/');
+  };
 
   return (
     <>
@@ -37,7 +43,7 @@ const SharedLayout = () => {
               )}
               {isUser && (
                 <li>
-                  <LogOutHeader type="button" onClick={() => logoutNewUser()}>
+                  <LogOutHeader type="button" onClick={logOut}>
                     Log Out
                   </LogOutHeader>
                 </li>

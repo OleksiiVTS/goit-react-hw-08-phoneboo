@@ -1,18 +1,14 @@
 // import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContacts } from 'redux/useContacts';
 
 const Home = () => {
-  const { getNewUser, error, isUser } = useContacts();
-
-  useEffect(() => {
-    getNewUser();
-  }, [getNewUser]);
+  const { isUser } = useContacts();
 
   return (
     <section>
-      {error ? (
+      {!isUser ? (
         <div>
           <h1>
             Please <Link to="/register">register</Link> or{' '}

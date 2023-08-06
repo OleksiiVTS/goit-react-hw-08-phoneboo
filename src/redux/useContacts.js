@@ -6,10 +6,13 @@ import {
   selectIsLoading,
   selectError,
   selectVisibleContacts,
+  selectToken,
 } from './selectors';
 import {
+  getContact,
   addContact,
   deleteContact,
+  updateContact,
   getUser,
   createUser,
   loginUser,
@@ -21,6 +24,7 @@ import { useCallback } from 'react';
 export const useContacts = () => {
   const dispatch = useDispatch();
   const isUser = useSelector(selectUser);
+  const isToken = useSelector(selectToken);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const valueContacts = useSelector(selectContacts);
@@ -40,6 +44,8 @@ export const useContacts = () => {
   };
 
   //! ##################################################################
+  const getContacts = useCallback(() => dispatch(getContact()), [dispatch]);
+
   const addContacts = newContact => {
     dispatch(addContact(newContact));
   };
@@ -48,20 +54,27 @@ export const useContacts = () => {
     dispatch(deleteContact(id));
   };
 
+  const updateContacts = contact => {
+    dispatch(updateContact(contact));
+  };
+
   const filterContact = updatedTodo => {
     dispatch(setStatusFilter(updatedTodo));
   };
 
   return {
     isUser,
+    isToken,
     isLoading,
     error,
     valueContacts,
     valueFilters,
     visibleContacts,
+    getContacts,
     addContacts,
     deleteContacts,
     filterContact,
+    updateContacts,
     getNewUser,
     createNewUser,
     loginNewUser,

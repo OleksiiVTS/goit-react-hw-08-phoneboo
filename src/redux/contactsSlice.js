@@ -5,7 +5,19 @@ import {
   isPending,
   isRejected,
 } from '@reduxjs/toolkit';
-import { getUser, createUser, loginUser, logoutUser } from './operations';
+import {
+  getUser,
+  createUser,
+  loginUser,
+  logoutUser,
+  getContact,
+  addContact,
+  deleteContact,
+  updateContact,
+} from './operations';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
+
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -28,25 +40,74 @@ export const contactsSlice = createSlice({
       .addCase(logoutUser.fulfilled, state => {
         state.dataUser = null;
         state.token = null;
+        state.dataContacts = [];
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.dataUser = action.payload;
       })
+      .addCase(getContact.fulfilled, (state, action) => {
+        state.dataContacts = action.payload;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.dataContacts.push(action.payload);
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        const index = state.dataContacts.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.dataContacts.splice(index, 1);
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        console.log('update:', action);
+      })
       .addMatcher(
-        isAnyOf(isPending(createUser, loginUser, logoutUser, getUser)),
+        isAnyOf(
+          isPending(
+            createUser,
+            loginUser,
+            logoutUser,
+            getUser,
+            getContact,
+            addContact,
+            deleteContact,
+            updateContact
+          )
+        ),
         state => {
           state.isLoading = true;
         }
       )
       .addMatcher(
-        isAnyOf(isRejected(createUser, loginUser, logoutUser, getUser)),
+        isAnyOf(
+          isRejected(
+            createUser,
+            loginUser,
+            logoutUser,
+            getUser,
+            getContact,
+            addContact,
+            deleteContact,
+            updateContact
+          )
+        ),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
         }
       )
       .addMatcher(
-        isAnyOf(isFulfilled(createUser, loginUser, logoutUser, getUser)),
+        isAnyOf(
+          isFulfilled(
+            createUser,
+            loginUser,
+            logoutUser,
+            getUser,
+            getContact,
+            addContact,
+            deleteContact,
+            updateContact
+          )
+        ),
         state => {
           state.isLoading = false;
           state.error = null;
@@ -55,4 +116,11 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const contactsReducer = persistReducer(
+  {
+    key: 'ist_contacts',
+    storage,
+    whitelist: ['token'],
+  },
+  contactsSlice.reducer
+);
