@@ -5,7 +5,7 @@ import css from './ContactItem.module.css';
 
 const ContactList = ({ listContacts }) => {
   return (
-    <ul>
+    <ul className={css.listUl}>
       {listContacts.map(listContact => (
         <li className={css.itemContact} key={listContact.id}>
           <ContactItem

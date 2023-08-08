@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const Contacts = lazy(() => import('../pages/Contacts/Contacts.jsx'));
-const Home = lazy(() => import('../pages/Home.jsx'));
+const Home = lazy(() => import('../pages/Home/Home.jsx'));
 const Login = lazy(() => import('../pages/Login.jsx'));
 const Register = lazy(() => import('../pages/Register.jsx'));
 

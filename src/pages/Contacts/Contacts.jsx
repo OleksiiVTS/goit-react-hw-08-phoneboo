@@ -13,12 +13,12 @@ const Contacts = () => {
   return (
     <div>
       <Link to={'/'}>&#129044; Back Home</Link>
-      <div className={css.appDiv}>
-        <section>
+      <div>
+        <section className={css.appSection}>
           <h1>Add Contacts</h1>
           <ContactForm />
         </section>
-        <section>
+        <section className={css.appSection}>
           <h2>Contacts</h2>
           <Filter />
           {isLoading && !error && (

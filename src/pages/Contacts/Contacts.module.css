@@ -1,5 +1,18 @@
-.appDiv {
-  padding: 0 15px;
+.appSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.appSection:not(:last-child) {
+  background-image: linear-gradient(
+    to top,
+    rgba(46, 47, 66, 0.7),
+    rgba(255, 255, 255, 0.7)
+  );
+  box-shadow: 0 5px 5px -5px #494848;
 }
 
 .loader {
