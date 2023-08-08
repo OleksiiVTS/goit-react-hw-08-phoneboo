@@ -17,7 +17,6 @@ export const getUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistToken = state.contacts.token;
-    console.log(token);
     if (!persistToken) {
       return;
     }

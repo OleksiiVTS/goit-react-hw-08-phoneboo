@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { useContacts } from 'redux/useContacts';
 
 const Home = () => {
-  const { isUser } = useContacts();
+  const { isUser, isLoggedIn } = useContacts();
 
   return (
     <section>
-      {!isUser ? (
+      {!isLoggedIn ? (
         <div>
           <h1>
             Please <Link to="/register">register</Link> or{' '}

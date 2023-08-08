@@ -5,21 +5,10 @@ import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import { useContacts } from 'redux/useContacts';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Contacts = () => {
-  const {
-    visibleContacts,
-    valueContacts,
-    isUser,
-    isLoading,
-    error,
-    getContacts,
-  } = useContacts();
-
-  useEffect(() => {
-    isUser && getContacts();
-  }, [getContacts, isUser]);
+  const { visibleContacts, valueContacts, isLoading, error } = useContacts();
 
   return (
     <div>

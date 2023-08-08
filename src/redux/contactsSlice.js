@@ -24,6 +24,7 @@ export const contactsSlice = createSlice({
     dataUser: null,
     token: null,
     dataContacts: [],
+    isLoggedIn: false,
     isLoading: false,
     error: null,
   },
@@ -32,18 +33,22 @@ export const contactsSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.dataUser = action.payload.user;
         state.token = action.payload.token;
+        state.isLoggedIn = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.dataUser = action.payload.user;
         state.token = action.payload.token;
+        state.isLoggedIn = true;
       })
       .addCase(logoutUser.fulfilled, state => {
         state.dataUser = null;
         state.token = null;
         state.dataContacts = [];
+        state.isLoggedIn = false;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.dataUser = action.payload;
+        state.isLoggedIn = true;
       })
       .addCase(getContact.fulfilled, (state, action) => {
         state.dataContacts = action.payload;

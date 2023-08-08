@@ -7,6 +7,7 @@ import {
   selectError,
   selectVisibleContacts,
   selectToken,
+  selectLoggedIn,
 } from './selectors';
 import {
   getContact,
@@ -26,6 +27,7 @@ export const useContacts = () => {
   const isUser = useSelector(selectUser);
   const isToken = useSelector(selectToken);
   const isLoading = useSelector(selectIsLoading);
+  const isLoggedIn = useSelector(selectLoggedIn);
   const error = useSelector(selectError);
   const valueContacts = useSelector(selectContacts);
   const valueFilters = useSelector(selectFilters);
@@ -66,6 +68,7 @@ export const useContacts = () => {
     isUser,
     isToken,
     isLoading,
+    isLoggedIn,
     error,
     valueContacts,
     valueFilters,

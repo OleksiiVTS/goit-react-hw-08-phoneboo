@@ -26,6 +26,13 @@ export const NavUlHeader = styled.ul`
   padding: 0;
 `;
 
+export const NavLiHeader = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const NavDivHeader = styled.div`
   display: flex;
   gap: 20px;

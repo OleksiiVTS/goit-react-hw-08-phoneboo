@@ -10,10 +10,11 @@ import {
   NavUlHeader,
   NavDivHeader,
   LogOutHeader,
+  NavLiHeader,
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
-  const { logoutNewUser, isUser } = useContacts();
+  const { logoutNewUser, isLoggedIn, isUser } = useContacts();
   let navigate = useNavigate();
 
   const logOut = () => {
@@ -30,10 +31,12 @@ const SharedLayout = () => {
               <li>
                 <NavDivHeader>
                   <StyledLink to="/">Home</StyledLink>
-                  {isUser && <StyledLink to="/contacts">Contacts</StyledLink>}
+                  {isLoggedIn && (
+                    <StyledLink to="/contacts">Contacts</StyledLink>
+                  )}
                 </NavDivHeader>
               </li>
-              {!isUser && (
+              {!isLoggedIn && (
                 <li>
                   <NavDivHeader>
                     <StyledLink to="/register">Register</StyledLink>
@@ -41,12 +44,13 @@ const SharedLayout = () => {
                   </NavDivHeader>
                 </li>
               )}
-              {isUser && (
-                <li>
+              {isLoggedIn && (
+                <NavLiHeader>
+                  <p>{isUser.email}</p>
                   <LogOutHeader type="button" onClick={logOut}>
                     Log Out
                   </LogOutHeader>
-                </li>
+                </NavLiHeader>
               )}
             </NavUlHeader>
           </nav>
