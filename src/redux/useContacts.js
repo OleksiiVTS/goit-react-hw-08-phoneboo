@@ -8,12 +8,14 @@ import {
   selectVisibleContacts,
   selectToken,
   selectLoggedIn,
+  selectUpdateContact,
 } from './selectors';
 import {
   getContact,
   addContact,
   deleteContact,
   updateContact,
+  getUpdateContact,
   getUser,
   createUser,
   loginUser,
@@ -32,6 +34,7 @@ export const useContacts = () => {
   const valueContacts = useSelector(selectContacts);
   const valueFilters = useSelector(selectFilters);
   const visibleContacts = useSelector(selectVisibleContacts);
+  const getUpdate = useSelector(selectUpdateContact);
 
   const getNewUser = useCallback(() => dispatch(getUser()), [dispatch]);
 
@@ -48,6 +51,10 @@ export const useContacts = () => {
   //! ##################################################################
   const getContacts = useCallback(() => dispatch(getContact()), [dispatch]);
 
+  const getUpdateContacts = updateContact => {
+    dispatch(getUpdateContact(updateContact));
+  };
+
   const addContacts = newContact => {
     dispatch(addContact(newContact));
   };
@@ -56,8 +63,8 @@ export const useContacts = () => {
     dispatch(deleteContact(id));
   };
 
-  const updateContacts = contact => {
-    dispatch(updateContact(contact));
+  const updateContacts = newContact => {
+    dispatch(updateContact(newContact));
   };
 
   const filterContact = updatedTodo => {
@@ -73,11 +80,13 @@ export const useContacts = () => {
     valueContacts,
     valueFilters,
     visibleContacts,
+    getUpdate,
     getContacts,
     addContacts,
     deleteContacts,
     filterContact,
     updateContacts,
+    getUpdateContacts,
     getNewUser,
     createNewUser,
     loginNewUser,

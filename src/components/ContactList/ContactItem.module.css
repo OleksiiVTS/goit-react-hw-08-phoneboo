@@ -9,6 +9,24 @@
   border-radius: 5px;
 }
 
+.itemsButton {
+  display: flex;
+  gap: 5px;
+}
+
+.itemsButton button {
+  transition-property: color;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 28px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: orange;
+  }
+}
+
 .listUl {
   display: flex;
   flex-direction: column;

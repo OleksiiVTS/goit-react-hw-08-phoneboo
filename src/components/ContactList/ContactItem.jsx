@@ -1,17 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useContacts } from 'redux/useContacts';
+import css from './ContactItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const ContactItem = ({ id, name, number }) => {
-  const { deleteContacts } = useContacts();
+  const { deleteContacts, getUpdateContacts } = useContacts();
+  const navigate = useNavigate();
+
+  const update = contactData => {
+    getUpdateContacts(contactData);
+    navigate('update');
+  };
+
   return (
     <>
       <p>
         {name}: {number}
       </p>
-      <button type="button" onClick={() => deleteContacts(id)}>
-        &times;
-      </button>
+      <div className={css.itemsButton}>
+        <button
+          type="button"
+          title="Update contact"
+          onClick={() => update({ id, name, number })}
+        >
+          ✎
+        </button>
+        <button
+          type="button"
+          title="Delete contact"
+          onClick={() => deleteContacts(id)}
+        >
+          &times;
+        </button>
+      </div>
     </>
   );
 };

@@ -2,20 +2,24 @@ import PropTypes from 'prop-types';
 import ContactItem from './ContactItem';
 import React from 'react';
 import css from './ContactItem.module.css';
+import { Outlet } from 'react-router-dom';
 
 const ContactList = ({ listContacts }) => {
   return (
-    <ul className={css.listUl}>
-      {listContacts.map(listContact => (
-        <li className={css.itemContact} key={listContact.id}>
-          <ContactItem
-            id={listContact.id}
-            name={listContact.name}
-            number={listContact.number}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={css.listUl}>
+        {listContacts.map(listContact => (
+          <li className={css.itemContact} key={listContact.id}>
+            <ContactItem
+              id={listContact.id}
+              name={listContact.name}
+              number={listContact.number}
+            />
+          </li>
+        ))}
+      </ul>
+      <Outlet />
+    </>
   );
 };
 

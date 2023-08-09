@@ -7,8 +7,9 @@ import PublicRoute from './PublicRoute';
 
 const Contacts = lazy(() => import('../pages/Contacts/Contacts.jsx'));
 const Home = lazy(() => import('../pages/Home/Home.jsx'));
-const Login = lazy(() => import('../pages/Login.jsx'));
-const Register = lazy(() => import('../pages/Register.jsx'));
+const Login = lazy(() => import('../pages/Register/Login.jsx'));
+const Register = lazy(() => import('../pages/Register/Register.jsx'));
+const Update = lazy(() => import('../components/Update/Update.jsx'));
 
 export const App = () => {
   const { getNewUser, getContacts, isToken, isLoading } = useContacts();
@@ -23,7 +24,9 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route element={<PrivateRoute />}>
-            <Route path="contacts" element={<Contacts />} />
+            <Route path="contacts" element={<Contacts />}>
+              <Route path="update" element={<Update />} />
+            </Route>
           </Route>
           <Route element={<PublicRoute />}>
             <Route path="login" element={<Login />} />

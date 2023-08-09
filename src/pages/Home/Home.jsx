@@ -14,11 +14,11 @@ const Home = () => {
           <div className={css.homeDiv}>
             <h1>
               Please{' '}
-              <Link className={css.link} to="/register">
+              <Link className={css.link} to="register">
                 register
               </Link>{' '}
               or{' '}
-              <Link className={css.link} to="/login">
+              <Link className={css.link} to="login">
                 login
               </Link>
               .
@@ -29,7 +29,7 @@ const Home = () => {
             <h1>Hello {isUser?.name}.</h1>
             <h2>
               Would you like to see your{' '}
-              <Link className={css.link} to="/contacts">
+              <Link className={css.link} to="contacts">
                 {' '}
                 contacts
               </Link>

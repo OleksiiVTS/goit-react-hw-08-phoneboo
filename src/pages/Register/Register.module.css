@@ -1,0 +1,48 @@
+.section {
+  padding: 0 15px;
+}
+
+.container {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  min-width: 300px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.formDiv {
+  display: inline-flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.formLabel {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  /* gap: 20px; */
+}
+
+.button {
+  transition-property: background-color;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  margin-top: 10px;
+  padding: 5px 10px;
+
+  border-radius: 5px;
+
+  &:hover {
+    background-color: orange;
+  }
+}

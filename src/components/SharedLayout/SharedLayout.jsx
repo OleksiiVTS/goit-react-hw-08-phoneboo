@@ -47,7 +47,7 @@ const SharedLayout = () => {
               {isLoggedIn && (
                 <NavLiHeader>
                   <p>{isUser.email}</p>
-                  <LogOutHeader type="button" onClick={logOut}>
+                  <LogOutHeader type="/button" onClick={logOut}>
                     Log Out
                   </LogOutHeader>
                 </NavLiHeader>

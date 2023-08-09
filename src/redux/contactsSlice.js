@@ -14,6 +14,7 @@ import {
   addContact,
   deleteContact,
   updateContact,
+  getUpdateContact,
 } from './operations';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
@@ -24,6 +25,7 @@ export const contactsSlice = createSlice({
     dataUser: null,
     token: null,
     dataContacts: [],
+    updateContact: null,
     isLoggedIn: false,
     isLoading: false,
     error: null,
@@ -63,7 +65,11 @@ export const contactsSlice = createSlice({
         state.dataContacts.splice(index, 1);
       })
       .addCase(updateContact.fulfilled, (state, action) => {
-        console.log('update:', action);
+        state.updateContact = null;
+      })
+      .addCase(getUpdateContact, (state, action) => {
+        const { id, name, number } = action.payload;
+        state.updateContact = { id, name, number };
       })
       .addMatcher(
         isAnyOf(
