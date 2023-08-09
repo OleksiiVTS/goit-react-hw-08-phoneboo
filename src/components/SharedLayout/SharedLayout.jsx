@@ -32,22 +32,22 @@ const SharedLayout = () => {
                 <NavDivHeader>
                   <StyledLink to="/">Home</StyledLink>
                   {isLoggedIn && (
-                    <StyledLink to="/contacts">Contacts</StyledLink>
+                    <StyledLink to="contacts">Contacts</StyledLink>
                   )}
                 </NavDivHeader>
               </li>
               {!isLoggedIn && (
                 <li>
                   <NavDivHeader>
-                    <StyledLink to="/register">Register</StyledLink>
-                    <StyledLink to="/login">Login</StyledLink>
+                    <StyledLink to="register">Register</StyledLink>
+                    <StyledLink to="login">Login</StyledLink>
                   </NavDivHeader>
                 </li>
               )}
               {isLoggedIn && (
                 <NavLiHeader>
                   <p>{isUser.email}</p>
-                  <LogOutHeader type="/button" onClick={logOut}>
+                  <LogOutHeader type="button" onClick={logOut}>
                     Log Out
                   </LogOutHeader>
                 </NavLiHeader>

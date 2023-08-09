@@ -13,12 +13,12 @@ const Register = () => {
     const password = evt.target.password.value;
     createNewUser({ name, email, password });
     evt.target.reset();
-    navigate('contacts');
+    navigate('/contacts');
   };
 
   return (
     <section className={css.section}>
-      <Link to={'/'}>&#129044; Back Home</Link>
+      <Link to="/">&#129044; Back Home</Link>
       <div className={css.container}>
         <h1>Register</h1>
         <form className={css.form} onSubmit={handleSubmit}>

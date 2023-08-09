@@ -12,7 +12,7 @@ const Contacts = () => {
 
   return (
     <div>
-      <Link to={'/'}>&#129044; Back Home</Link>
+      <Link to="/">&#129044; Back Home</Link>
       <div>
         <section className={css.appSection}>
           <h1>Add Contacts</h1>
