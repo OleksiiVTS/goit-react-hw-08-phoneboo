@@ -1,11 +1,11 @@
 // import { Link } from 'react-router-dom';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 import css from './Home.module.css';
 
 const Home = () => {
-  const { isUser, isLoggedIn } = useContacts();
+  const { isUser, isLoggedIn } = usePhonebook();
 
   return (
     <section>

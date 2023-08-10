@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 import css from './Register.module.css';
 
 const Register = () => {
-  const { createNewUser } = useContacts();
+  const { createNewUser } = usePhonebook();
   const navigate = useNavigate();
 
   const handleSubmit = evt => {

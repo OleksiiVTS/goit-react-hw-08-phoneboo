@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 import css from '../Loader/Loader.module.css';
 import {
   Header,
@@ -14,7 +14,7 @@ import {
 } from './SharedLayout.styled';
 
 const SharedLayout = () => {
-  const { logoutNewUser, isLoggedIn, isUser } = useContacts();
+  const { logoutNewUser, isLoggedIn, isUser } = usePhonebook();
   let navigate = useNavigate();
 
   const logOut = () => {

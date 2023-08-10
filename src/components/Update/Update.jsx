@@ -1,10 +1,10 @@
 import React from 'react';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 import css from './Update.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const Update = () => {
-  const { updateContacts, getContacts, getUpdate } = useContacts();
+  const { updateContacts, getContacts, getUpdate } = usePhonebook();
   let navigate = useNavigate();
   const { id, name, number } = getUpdate;
 
@@ -13,7 +13,8 @@ const Update = () => {
     const name = evt.target.name.value;
     const number = evt.target.number.value;
     updateContacts({ id, name, number });
-    getContacts();
+    window.setTimeout(() => getContacts(), [100]); // явно костиль ))
+    // getContacts();
     evt.target.reset();
     navigate('/contacts');
   };

@@ -1,36 +1,39 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUser,
-  selectContacts,
-  selectFilters,
-  selectIsLoading,
-  selectError,
-  selectVisibleContacts,
   selectToken,
   selectLoggedIn,
+  selectIsRefreshing,
+} from './auth/authSelectors';
+import {
+  selectContacts,
+  selectVisibleContacts,
   selectUpdateContact,
-} from './selectors';
+} from './constants/constantsSelectors';
+import { selectFilters } from './filters/filterSelectors';
+import {
+  getUser,
+  createUser,
+  loginUser,
+  logoutUser,
+} from './auth/authOperations';
 import {
   getContact,
   addContact,
   deleteContact,
   updateContact,
-  getUpdateContact,
-  getUser,
-  createUser,
-  loginUser,
-  logoutUser,
-} from './operations';
-import { setStatusFilter } from './filtersSlice';
+} from './constants/constantsOperations';
+import { setStatusFilter } from './filters/filtersSlice';
 import { useCallback } from 'react';
+import * as actions from './constants/contactsSlice';
 
-export const useContacts = () => {
+export const usePhonebook = () => {
   const dispatch = useDispatch();
+
   const isUser = useSelector(selectUser);
   const isToken = useSelector(selectToken);
-  const isLoading = useSelector(selectIsLoading);
+  const IsRefreshing = useSelector(selectIsRefreshing);
   const isLoggedIn = useSelector(selectLoggedIn);
-  const error = useSelector(selectError);
   const valueContacts = useSelector(selectContacts);
   const valueFilters = useSelector(selectFilters);
   const visibleContacts = useSelector(selectVisibleContacts);
@@ -52,7 +55,7 @@ export const useContacts = () => {
   const getContacts = useCallback(() => dispatch(getContact()), [dispatch]);
 
   const getUpdateContacts = updateContact => {
-    dispatch(getUpdateContact(updateContact));
+    dispatch(actions.getUpdateContact(updateContact));
   };
 
   const addContacts = newContact => {
@@ -74,9 +77,8 @@ export const useContacts = () => {
   return {
     isUser,
     isToken,
-    isLoading,
+    IsRefreshing,
     isLoggedIn,
-    error,
     valueContacts,
     valueFilters,
     visibleContacts,

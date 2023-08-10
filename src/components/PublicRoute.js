@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 
 export default function PublicRoute() {
-  const { isLoggedIn } = useContacts();
-  return !isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  const { isLoggedIn } = usePhonebook();
+  return !isLoggedIn ? <Outlet /> : <Navigate to="/contacts" />;
   // <Route {...routeProps}>
   //   {isLoggedIn ? children : <Navigate to="/" />}
   // </Route>

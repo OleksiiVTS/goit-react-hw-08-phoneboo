@@ -4,11 +4,16 @@ import css from './Contacts.module.css';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
-import { useContacts } from 'redux/useContacts';
-import React from 'react';
+import { usePhonebook } from 'redux/usePhonebook';
+import React, { useEffect } from 'react';
 
 const Contacts = () => {
-  const { visibleContacts, valueContacts, isLoading, error } = useContacts();
+  const { getContacts, visibleContacts, valueContacts, isLoading, error } =
+    usePhonebook();
+
+  useEffect(() => {
+    getContacts();
+  }, [getContacts]);
 
   return (
     <div>

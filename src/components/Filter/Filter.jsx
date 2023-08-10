@@ -1,8 +1,8 @@
 import React from 'react';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 
 const Filter = () => {
-  const { filterContact } = useContacts();
+  const { filterContact } = usePhonebook();
   return (
     <>
       <label>

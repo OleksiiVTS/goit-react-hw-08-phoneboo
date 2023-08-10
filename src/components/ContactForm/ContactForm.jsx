@@ -1,9 +1,9 @@
 import React from 'react';
 import css from './ContactForm.module.css';
-import { useContacts } from 'redux/useContacts';
+import { usePhonebook } from 'redux/usePhonebook';
 
 const ContactForm = () => {
-  const { valueContacts, addContacts } = useContacts();
+  const { valueContacts, addContacts } = usePhonebook();
 
   const handleSubmit = evt => {
     evt.preventDefault();
