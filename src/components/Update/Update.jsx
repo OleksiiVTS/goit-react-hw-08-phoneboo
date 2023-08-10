@@ -13,7 +13,7 @@ const Update = () => {
     const name = evt.target.name.value;
     const number = evt.target.number.value;
     updateContacts({ id, name, number });
-    window.setTimeout(() => getContacts(), [100]); // явно костиль ))
+    // window.setTimeout(() => getContacts(), [100]); // явно костиль ))
     // getContacts();
     evt.target.reset();
     navigate('/contacts');

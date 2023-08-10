@@ -43,13 +43,10 @@ export const contactsSlice = createSlice({
         state.dataContacts.splice(index, 1);
       })
       .addCase(updateContact.fulfilled, (state, action) => {
-        // const index = state.dataContacts.findIndex(
-        //   contact => contact.id === action.payload.id
-        // );
-        // state.dataContacts.splice(index, 1);
-        // state.dataContacts.push(action.payload);
-
-        // state.dataContacts = [...state.dataContacts, action.payload];
+        const index = state.dataContacts.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.dataContacts.splice(index, 1, action.payload);
         state.updateContact = null;
       })
       .addMatcher(
