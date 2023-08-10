@@ -10,7 +10,7 @@ const ContactItem = ({ id, name, number }) => {
 
   const update = contactData => {
     getUpdateContacts(contactData);
-    navigate('/update');
+    navigate('update');
   };
 
   return (
