@@ -48,6 +48,8 @@ export const contactsSlice = createSlice({
         // );
         // state.dataContacts.splice(index, 1);
         // state.dataContacts.push(action.payload);
+
+        // state.dataContacts[...state.dataContacts, action.payload];
         state.updateContact = null;
       })
       .addMatcher(
