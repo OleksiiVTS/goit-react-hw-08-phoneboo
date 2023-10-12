@@ -4,7 +4,7 @@ import css from './Update.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const Update = () => {
-  const { updateContacts, getContacts, getUpdate } = usePhonebook();
+  const { updateContacts, getUpdate } = usePhonebook();
   let navigate = useNavigate();
   const { id, name, number } = getUpdate;
 
